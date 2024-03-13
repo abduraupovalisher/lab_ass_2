@@ -26,11 +26,6 @@ int main() {
     cin >> num;
 
     int index = searchValue(elements, num);
-    if (index != -1) {
-        cout << "Index of " << num << " is: " << index << endl;
-    } else {
-        cout << num << " not found in the vector." << endl;
-    }
-
+    cout<<index;
     return 0;
 }
