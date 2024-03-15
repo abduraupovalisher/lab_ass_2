@@ -18,10 +18,10 @@ int main() {
     vector<pair<int, int>> total_grades;
 
     for (int i = 0; i < N; ++i) {
-        total_grades.push_back({grades[i][0] + grades[i][1] + grades[i][2], i + 1});
+        total_grades.push_back({grades[i][0] + grades[i][1] + grades[i][2], -(i + 1)});
     }
 
-    sort(total_grades.begin(), total_grades.end(), greater<pair<int, int>>());
+    sort(total_grades.begin(), total_grades.end());
 
     int studentID;
     cout << "Enter the ID of the student to find the rank: ";
@@ -29,7 +29,7 @@ int main() {
 
     int rank = 1;
     for (int i = 0; i < N; ++i) {
-        if (total_grades[i].second == studentID) {
+        if (-total_grades[i].second == studentID) {
             cout << "Rank of Student with ID " << studentID << ": " << rank << endl;
             return 0;
         }
