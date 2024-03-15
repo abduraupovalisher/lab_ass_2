@@ -3,40 +3,49 @@
 #include <algorithm>
 using namespace std;
 
+bool compareStudents(const pair<int, int>& s1, const pair<int, int>& s2) {
+    if (s1.first == s2.first) {
+        return s1.second < s2.second;
+    }
+    return s1.first > s2.first;
+}
+
+int findRank(const vector<pair<int, int>>& total_grades, int studentID) {
+    vector<pair<int, int>> sorted_grades = total_grades;
+    sort(sorted_grades.begin(), sorted_grades.end(), compareStudents);
+
+    for (int i = 0; i < sorted_grades.size(); ++i) {
+        if (sorted_grades[i].second == studentID) {
+            return i + 1;
+        }
+    }
+
+    return -1; // Student not found
+}
+
 int main() {
     int N;
     cout << "Enter the number of students: ";
     cin >> N;
 
-    vector<vector<int>> grades(N, vector<int>(3));
-    cout << "Enter the grades for each student:" << endl;
+    vector<pair<int, int>> total_grades(N);
+    cout << "Enter the total grades for each student:" << endl;
     for (int i = 0; i < N; ++i) {
         cout << "Student " << i + 1 << ": ";
-        cin >> grades[i][0] >> grades[i][1] >> grades[i][2];
+        cin >> total_grades[i].first;
+        total_grades[i].second = i + 1; // Store student ID
     }
-
-    vector<pair<int, int>> total_grades;
-
-    for (int i = 0; i < N; ++i) {
-        total_grades.push_back({grades[i][0] + grades[i][1] + grades[i][2], -(i + 1)});
-    }
-
-    sort(total_grades.begin(), total_grades.end());
 
     int studentID;
     cout << "Enter the ID of the student to find the rank: ";
     cin >> studentID;
 
-    int rank = 1;
-    for (int i = 0; i < N; ++i) {
-        if (-total_grades[i].second == studentID) {
-            cout << "Rank of Student with ID " << studentID << ": " << rank << endl;
-            return 0;
-        }
-        rank++;
+    int rank = findRank(total_grades, studentID);
+    if (rank != -1) {
+        cout << "Rank of Student with ID " << studentID << ": " << rank << endl;
+    } else {
+        cout << "Student with ID " << studentID << " not found." << endl;
     }
-
-    cout << "Student with ID " << studentID << " not found." << endl;
 
     return 0;
 }
