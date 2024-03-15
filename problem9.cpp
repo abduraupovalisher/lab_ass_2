@@ -2,25 +2,27 @@
 #include<vector>
 using namespace std;
 
-class Pupil{
+class Student{
 public:
     int a = 0;
 };
 
 int main(){
-    int n, temp = 0, a, b, c, r = 1;
+    
+    int n, temp = 0, a, b, c, j = 1;
     cin >> n;
-    vector<Pupil>v;
+    vector<Student>v;
     while(n--){
         cin >> a >> b >> c;
-        Pupil x;
+        Student x;
         x.a = a+b+c;
         v.push_back(x);
     }
-    if(v[0].a >= v[1].a) r ++;
+    
+    if(v[0].a >= v[1].a) j ++;
     for(int i = 2; i < v.size(); i ++){
-        if(v[i].a > v[1].a)r++;
+        if(v[i].a > v[1].a)j++;
 
     }
-    cout << r;
+    cout << j;
 }
