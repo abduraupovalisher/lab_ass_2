@@ -17,7 +17,7 @@ int main(){
         x.a = a+b+c;
         v.push_back(x);
     }
-    if(vec[0].a >= v[1].a) r ++;
+    if(v[0].a >= v[1].a) r ++;
     for(int i = 2; i < v.size(); i ++){
         if(v[i].a > v[1].a)r++;
 
